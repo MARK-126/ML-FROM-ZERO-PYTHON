@@ -74,9 +74,40 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-4. **Inicia Jupyter Notebook**
+4. **Instala el paquete utils en modo desarrollo (RECOMENDADO)**
+```bash
+pip install -e .
+```
+Esto permite importar `utils` desde cualquier notebook sin problemas de rutas.
+
+5. **Inicia Jupyter Notebook**
 ```bash
 jupyter notebook
+```
+
+### ⚠️ Importante: Configuración de Rutas
+
+**Si NO instalaste el paquete con `pip install -e .`**, necesitas configurar las rutas manualmente:
+
+**Opción A (Recomendada)**: Al inicio de cada notebook, usa:
+```python
+# En lugar de sys.path.append('../..')
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path.cwd().parent.parent))
+```
+
+**Opción B**: Usa el helper incluido:
+```python
+from notebook_setup import setup_notebook_path
+setup_notebook_path()
+```
+
+**Opción C**: Siempre ejecuta Jupyter desde la raíz del proyecto:
+```bash
+cd ML-FROM-ZERO-PYTHON
+jupyter notebook
+# Abre notebooks desde la interfaz web
 ```
 
 ## 📖 Contenido del Curso
@@ -332,6 +363,30 @@ Después de completar este curso, considera:
 - ✅ **Verificable**: Tests automatizados incluidos
 - 📊 **Visual**: Gráficos y visualizaciones en cada paso
 - 🐍 **Pythónico**: Código limpio y bien documentado
+
+## ⚠️ Problemas Conocidos y Limitaciones
+
+### Rutas de Importación
+**Problema**: Los notebooks usan `sys.path.append('../..')` que es frágil.
+
+**Solución**: Instala el proyecto con `pip install -e .` como se indica en la sección de instalación.
+
+**Alternativa**: Usa el helper `notebook_setup.py` o siempre ejecuta Jupyter desde la raíz del proyecto.
+
+### Uso de Scikit-learn
+Aunque implementamos los algoritmos desde cero, usamos `scikit-learn` para:
+- Generar datasets sintéticos (`make_classification`, `make_moons`, etc.)
+- Comparaciones y validación (opcional)
+
+Esto es intencional y no afecta el aprendizaje de las implementaciones desde cero.
+
+### Rendimiento
+Las implementaciones priorizan **claridad y educación** sobre rendimiento. Las versiones de producción (scikit-learn, TensorFlow) están altamente optimizadas en C/C++.
+
+### Compatibilidad
+- Probado en Python 3.8+
+- Puede haber warnings de NumPy/Pandas con versiones muy nuevas
+- Se recomienda usar las versiones especificadas en `requirements.txt`
 
 ## 🙏 Agradecimientos
 

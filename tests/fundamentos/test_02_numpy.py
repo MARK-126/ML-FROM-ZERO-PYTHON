@@ -138,29 +138,35 @@ def test_ejercicio_4_reshape():
     """
     Test para Ejercicio 4: Reshape y transpuesta
     """
-    def verificar(arr, matriz, transpuesta, suma_filas):
+    def verificar(matriz, transpuesta, suma_filas):
         all_passed = True
 
-        if arr is not None and not np.array_equal(arr, np.arange(1, 21)):
-            print_error("Array inicial incorrecto")
-            all_passed = False
-        else:
-            print("   ✓ Array del 1 al 20 creado")
+        if matriz is None:
+            print_error("matriz es None")
+            return False
 
-        if matriz is not None and matriz.shape != (4, 5):
+        if matriz.shape != (4, 5):
             print_error(f"Shape de matriz incorrecto. Expected: (4, 5), Got: {matriz.shape}")
             all_passed = False
         else:
             print("   ✓ Reshape a 4x5 correcto")
 
-        if transpuesta is not None and transpuesta.shape != (5, 4):
+        if transpuesta is None:
+            print_error("transpuesta es None")
+            return False
+
+        if transpuesta.shape != (5, 4):
             print_error(f"Shape de transpuesta incorrecto. Expected: (5, 4), Got: {transpuesta.shape}")
             all_passed = False
         else:
             print("   ✓ Transpuesta calculada correctamente")
 
+        if suma_filas is None:
+            print_error("suma_filas es None")
+            return False
+
         expected_suma = np.array([50, 54, 58, 62, 66])
-        if suma_filas is not None and not np.array_equal(suma_filas, expected_suma):
+        if not np.array_equal(suma_filas, expected_suma):
             print_error("Suma de filas incorrecta")
             print(f"   Expected: {expected_suma}")
             print(f"   Got: {suma_filas}")
@@ -176,11 +182,19 @@ def test_ejercicio_4_reshape():
     return verificar
 
 
-def test_ejercicio_5_algebra_lineal():
+def test_ejercicio_5_algebra():
     """
     Test para Ejercicio 5: Álgebra lineal
     """
     def verificar(producto, determinante):
+        if producto is None:
+            print_error("producto es None")
+            return False
+
+        if determinante is None:
+            print_error("determinante es None")
+            return False
+
         all_passed = True
 
         expected_producto = np.array([[2, 2], [1, 6]])
@@ -206,59 +220,50 @@ def test_ejercicio_5_algebra_lineal():
     return verificar
 
 
-def test_ejercicio_6_normalizar_minmax():
+def test_ejercicio_6_minmax():
     """
     Test para Ejercicio 6: Normalización Min-Max
     """
-    def verificar(func):
-        datos_prueba = np.array([[1, 200],
-                                 [2, 400],
-                                 [3, 600],
-                                 [4, 800]])
-
-        try:
-            resultado = func(datos_prueba)
-
-            all_passed = True
-
-            # Verificar que los valores estén en [0, 1]
-            min_vals = np.min(resultado, axis=0)
-            max_vals = np.max(resultado, axis=0)
-
-            if not np.allclose(min_vals, np.zeros(2), atol=1e-10):
-                print_error(f"Mínimos incorrectos. Expected: [0, 0], Got: {min_vals}")
-                all_passed = False
-            else:
-                print("   ✓ Valores mínimos = 0")
-
-            if not np.allclose(max_vals, np.ones(2), atol=1e-10):
-                print_error(f"Máximos incorrectos. Expected: [1, 1], Got: {max_vals}")
-                all_passed = False
-            else:
-                print("   ✓ Valores máximos = 1")
-
-            # Verificar normalización correcta
-            expected = np.array([[0.0, 0.0],
-                                 [1/3, 1/3],
-                                 [2/3, 2/3],
-                                 [1.0, 1.0]])
-
-            if not np.allclose(resultado, expected, atol=1e-10):
-                print_error("Normalización incorrecta")
-                print(f"   Expected:\n{expected}")
-                print(f"   Got:\n{resultado}")
-                all_passed = False
-            else:
-                print("   ✓ Normalización Min-Max correcta")
-
-            if all_passed:
-                print_success("Ejercicio 6 completado correctamente!")
-                print("   Función normalizar_minmax implementada correctamente")
-
-            return all_passed
-
-        except Exception as e:
-            print_error(f"Error al ejecutar la función: {str(e)}")
+    def verificar(resultado):
+        if resultado is None:
+            print_error("resultado es None")
             return False
+
+        all_passed = True
+
+        # Verificar que los valores estén en [0, 1]
+        min_vals = np.min(resultado, axis=0)
+        max_vals = np.max(resultado, axis=0)
+
+        if not np.allclose(min_vals, np.zeros(2), atol=1e-10):
+            print_error(f"Mínimos incorrectos. Expected: [0, 0], Got: {min_vals}")
+            all_passed = False
+        else:
+            print("   ✓ Valores mínimos = 0")
+
+        if not np.allclose(max_vals, np.ones(2), atol=1e-10):
+            print_error(f"Máximos incorrectos. Expected: [1, 1], Got: {max_vals}")
+            all_passed = False
+        else:
+            print("   ✓ Valores máximos = 1")
+
+        # Verificar normalización correcta
+        expected = np.array([[0.0, 0.0],
+                             [1/3, 1/3],
+                             [2/3, 2/3],
+                             [1.0, 1.0]])
+
+        if not np.allclose(resultado, expected, atol=1e-10):
+            print_error("Normalización incorrecta")
+            print(f"   Expected:\n{expected}")
+            print(f"   Got:\n{resultado}")
+            all_passed = False
+        else:
+            print("   ✓ Normalización Min-Max correcta")
+
+        if all_passed:
+            print_success("Ejercicio 6 completado correctamente!")
+
+        return all_passed
 
     return verificar

@@ -32,13 +32,17 @@ ML-FROM-ZERO-PYTHON/
 │   │   └── 03_knn.ipynb
 │   ├── algoritmos-no-supervisados/
 │   │   └── 01_kmeans.ipynb
-│   └── deep-learning/
-│       └── 01_redes_neuronales.ipynb
+│   ├── deep-learning/
+│   │   └── 01_redes_neuronales.ipynb
+│   ├── evaluacion/
+│   │   └── 01_metricas_evaluacion.ipynb
+│   └── notebook_setup.py (helper de configuración)
 ├── utils/
 │   ├── __init__.py
 │   ├── test_utils.py
 │   └── plot_utils.py
 ├── data/
+├── setup.py
 ├── requirements.txt
 └── README.md
 ```
@@ -202,6 +206,17 @@ class RegresionLinear:
 - Backpropagation
 - Funciones de activación
 - Clasificación no lineal
+
+### Módulo 5: Evaluación y Validación
+
+#### 11 - Métricas y Evaluación de Modelos
+**Implementación DESDE CERO**
+- K-Fold Cross-Validation
+- Métricas completas de clasificación
+- Curva ROC y AUC Score
+- Curva Precision-Recall
+- Grid Search manual para optimización de hiperparámetros
+- Comparación de modelos
 
 ## 🎯 Cómo Usar Este Curso
 
